@@ -20,4 +20,6 @@ def analyse_num (df) :
 def analyse_obj (df) :
     cols=df.select_dtypes(include=['object']).columns
     df=df[cols]
-    return df.describe().T
+    summary_df=df.describe().T
+    summary_df['null values%']=df.isna().sum()/summary_df['count']*100
+    return summary_df
